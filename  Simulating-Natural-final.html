@@ -1,0 +1,123 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      #div1 {  
+      width: 0;
+      height: 0;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-bottom: 100px solid red;
+      position: absolute;
+  }
+     #div1:after {
+     width: 0;
+     height: 0;
+     border-left: 60px solid transparent;
+     border-right: 60px solid transparent;
+     border-top: 100px solid red;
+     position: absolute;
+     content: "";
+     top: 30px;
+     left: -60px;
+ }
+
+        .ball{
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            z-index: 100;
+            background-color: green;
+            position: absolute;
+            top:30px;
+            left: 400px;
+        }
+	
+        .center{
+            margin:0 auto;
+        }
+        .line{
+            z-index: 50;
+            height: 100%;
+            width: 5;
+            background-color: #000;
+            margin: 0 auto;
+            position:absolute;
+        }
+        .top{
+            position: absolute;
+            left: 20px;
+        }
+        .bottom{
+            position: absolute;
+            left: 300px;
+        }
+      
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div class="line top"></div>
+<div class="ball" id="ball"></div>
+<div class="line bottom"></div>
+<script type="text/javascript">
+  //ball
+  var ball = document.getElementById("ball");
+		var top1=30;
+		var left1=30;
+		var direction = 1;
+		var dir2=1;
+		draw2=function(){
+			if(left1>=200)
+			{
+				direction = -1;
+			}
+			if(left1 < 10)
+			{
+				direction = 1;
+			}
+			if(top1 <top1+1)
+			{
+				dir2=1;
+			}
+			if(top1>top1+1)
+			{
+				dir2=-1;
+			}
+			top1+=dir2;
+			left1+=direction*5;
+			ball.style.left = (left1+"px");
+			if(top1<600){
+			ball.style.top=(top1+"px");
+			}
+			
+		};
+
+      setInterval(draw2,10);
+  
+  //hexagram
+  
+  window.onload = function()
+{
+var start = document.getElementById('div1');
+  move(start, 600);
+};
+
+function move(obj, pos)
+{
+this.speed=0
+this.left=0
+draw=function(){
+this.speed += (pos - obj.offsetLeft)/5;
+this.speed *= 0.8;
+this.left += this.speed;
+obj.style.left = obj.offsetLeft + this.speed + 'px';
+}
+ 
+  setInterval(draw, 60);
+}
+</script>
+</body>
+</html>
